@@ -126,13 +126,8 @@ DROP TABLE IF EXISTS role;
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   movie_title TEXT,
-  year INTEGER
-);
-
-CREATE TABLE mpaa (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  rating TEXT,
-  movie_title_id INTEGER
+  year INTEGER,
+  rating TEXT
 );
 
 CREATE TABLE actor (
@@ -159,48 +154,30 @@ CREATE TABLE role (
 
 INSERT INTO movies (
     movie_title,
-    year
+    year,
+    rating
 ) VALUES (
   "Batman Begins",
-  2005
+  2005,
+  "PG-13"
   );
 INSERT INTO movies (
     movie_title,
-    year
+    year,
+    rating
 ) VALUES (
   "The Dark Knight",
-  2008 
+  2008,
+  "PG-13" 
 );
 INSERT INTO movies (
     movie_title,
-    year
+    year,
+    rating
 ) VALUES (
   "The Dark Knight Rises",
-  2012 
-);
-
-INSERT INTO mpaa (
-    movie_title_id,
-    rating
-) VALUES (
-  1,
-  "PG-13" 
-);
-
-INSERT INTO mpaa (
-    movie_title_id,
-    rating
-) VALUES (
-  2,
-  "PG-13" 
-);
-
-INSERT INTO mpaa (
-    movie_title_id,
-    rating
-) VALUES (
-  3,
-  "PG-13" 
+  2012,
+  "PG-13"
 );
 
 INSERT INTO studio (
@@ -440,9 +417,8 @@ INSERT INTO role (
 
 -- The SQL statement for the movies output
 
-SELECT movies.movie_title, movies.year, mpaa.rating, studio_name
+SELECT movies.movie_title, movies.year, movies.rating, studio_name
 FROM movies
-INNER JOIN mpaa ON movies.id = mpaa.movie_title_id
 INNER JOIN studio ON movies.id = studio.movie_title_id
 ORDER BY movies.year;
 
