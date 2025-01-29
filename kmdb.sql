@@ -153,11 +153,80 @@ CREATE TABLE role (
   movie_id INTEGER	
 );
 
-
-
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+
+INSERT INTO movies (
+    movie_title,
+    year
+) VALUES (
+  "Batman Begins",
+  2005
+  );
+INSERT INTO movies (
+    movie_title,
+    year
+) VALUES (
+  "The Dark Knight",
+  2008 
+);
+INSERT INTO movies (
+    movie_title,
+    year
+) VALUES (
+  "The Dark Knight Rises",
+  2012 
+);
+
+INSERT INTO mpaa (
+    movie_title_id,
+    rating
+) VALUES (
+  1,
+  "PG-13" 
+);
+
+INSERT INTO mpaa (
+    movie_title_id,
+    rating
+) VALUES (
+  2,
+  "PG-13" 
+);
+
+INSERT INTO mpaa (
+    movie_title_id,
+    rating
+) VALUES (
+  3,
+  "PG-13" 
+);
+
+INSERT INTO studio (
+    studio_name,
+    movie_title_id
+) VALUES (
+  "Warner Bros.",
+  1 
+);
+
+INSERT INTO studio (
+    studio_name,
+    movie_title_id
+) VALUES (
+  "Warner Bros.",
+  2 
+);
+
+INSERT INTO studio (
+    studio_name,
+    movie_title_id
+) VALUES (
+  "Warner Bros.",
+  3 
+);
+
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -165,7 +234,12 @@ CREATE TABLE role (
 .print ""
 
 -- The SQL statement for the movies output
--- TODO!
+
+SELECT movies.movie_title, movies.year, mpaa.rating, studio_name
+FROM movies
+INNER JOIN mpaa ON movies.id = mpaa.movie_title_id
+INNER JOIN studio ON movies.id = studio.movie_title_id
+ORDER BY movies.year;
 
 -- Prints a header for the cast output
 .print ""
